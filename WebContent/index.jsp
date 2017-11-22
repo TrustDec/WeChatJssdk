@@ -12,7 +12,7 @@
 	<script>
 		function test(){
 			$.ajax(
-				{ url: "/HelloWorld/Servlet", 
+				{ url: "/WebContent/Demo1", 
 				context: document.body, 
 				success: function(data){
 					console.log(data);
