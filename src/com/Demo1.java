@@ -17,8 +17,8 @@ public class Demo1 extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		WeChatUtil we=new WeChatUtil();
-		we.doStep2();
-		
+		we.doStep2("kgt8ON7yVITDhtdwci0qeZivwBqIbBwbdXwB4uJpwVGcFbDIWbyk6ycX3BgyCmq6r9yh078ZY9U1uV1IYeoN1Q");
+		//i
 		request.getParameter("bname");
 		response.getWriter().print("ok");
 		

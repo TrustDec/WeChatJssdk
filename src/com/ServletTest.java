@@ -28,7 +28,7 @@ public class ServletTest extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
     public ServletTest() {
-        super();
+        super(); 
         // TODO Auto-generated constructor stub
     }
 
@@ -36,38 +36,43 @@ public class ServletTest extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		WeChatUtil we=new WeChatUtil();
-		String access_token = "https://qyapi.weixin.qq.com/cgi-bin/gettoken";
-		
-        String accessToken = sendGet(access_token,"corpid="+we.appId+"&corpsecret=8W-jjU06cUJVO3AfZ4DZNP-xbsOqvovzto9hMcFIWGE");
-        accessToken = "["+accessToken+"]";
-        JSONArray jsonArray = JSONArray.fromObject(accessToken);
-        String AccessToken="";
-        if(jsonArray.size()>0){
-      	  for(int i = 0; i < jsonArray.size(); i++){
-      		  JSONObject job = jsonArray.getJSONObject(i);  // 遍历 jsonarray 数组，把每一个对象转成 json 对象
-      		  AccessToken = job.get("access_token").toString();
-      	  }
-      	  // System.out.print(AccessToken);
-        }
-        // kgt8ON7yVITDhtdwci0qeZivwBqIbBwbdXwB4uJpwVHABoT0RDD0oZillxk3ZxubUQsi2n8INnyXf4z4D4f3GA
-        String jsapi_ticket = "https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket";
-        String jsapiTicket = sendGet(jsapi_ticket,"access_token="+AccessToken);
-        jsapiTicket = "["+jsapiTicket+"]";
-        JSONArray jsonArrayJSAPI = JSONArray.fromObject(jsapiTicket);
-        String JsapiTicket="";
-        if(jsonArrayJSAPI.size()>0){
-        	  for(int i = 0; i < jsonArrayJSAPI.size(); i++){
-        		  JSONObject job = jsonArrayJSAPI.getJSONObject(i);  // 遍历 jsonarray 数组，把每一个对象转成 json 对象
-        		  JsapiTicket = job.get("ticket").toString();
-        	  }
-        	  // System.out.print(JsapiTicket);
-          }
-		String test = we.doStep2();
-		//System.out.print("==========================");
-		//System.out.print(test);
-		response.getWriter().print("{\"signature\":\""+test+"\",\"result\":"+accessToken+",\"jsapi_ticket\":"+jsonArrayJSAPI+",\"ticket\":\""+JsapiTicket+"\"}");
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+		response.setHeader("Access-Control-Max-Age", "3600");
+		response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+		response.setContentType("application/json; charset=utf-8");
+			// TODO Auto-generated method stub
+			WeChatUtil we = new WeChatUtil();
+			String access_token = "https://qyapi.weixin.qq.com/cgi-bin/gettoken";
+			
+	        String accessToken = sendGet(access_token,"corpid="+we.appId+"&corpsecret=iynCQX7D5W9ar2MxmgQV-K55iS5Ou5_MAsboVMBzMSs");
+	        accessToken = "["+accessToken+"]";
+	        JSONArray jsonArray = JSONArray.fromObject(accessToken);
+	        String AccessToken="";
+	        if(jsonArray.size()>0){
+	      	  for(int i = 0; i < jsonArray.size(); i++){
+	      		  JSONObject job = jsonArray.getJSONObject(i);  // 遍历 jsonarray 数组，把每一个对象转成 json 对象
+	      		  AccessToken = job.get("access_token").toString();
+	      	  }
+	      	   System.out.print(AccessToken);
+	        }
+	        
+	        String jsapi_ticket = "https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket";
+	        String jsapiTicket = sendGet(jsapi_ticket,"access_token="+AccessToken);
+	        jsapiTicket = "["+jsapiTicket+"]";
+	        JSONArray jsonArrayJSAPI = JSONArray.fromObject(jsapiTicket);
+	        String JsapiTicket="";
+	        if(jsonArrayJSAPI.size()>0){
+	        	  for(int i = 0; i < jsonArrayJSAPI.size(); i++){
+	        		  JSONObject job = jsonArrayJSAPI.getJSONObject(i);  // 遍历 jsonarray 数组，把每一个对象转成 json 对象
+	        		  JsapiTicket = job.get("ticket").toString();
+	        	  }
+	          }
+	//		String JsapiTicket="kgt8ON7yVITDhtdwci0qeZivwBqIbBwbdXwB4uJpwVFVK10yE1WezHwAOT7oLLxucqBHZucIMBEbCpOFRKaGVw";
+	//		String AccessToken="Idp8-j2-xa5B6Z-9h8XxStafR1aeK8LTomuNE4_0LoPvcN_zfYNt16mmHvigP0Qs3s_PtQXMqlb2y7k8fKilpmcjL5sDyXxxALNuHAmQzTObbAzJfKlBa8GEv8QaU3sXdIIsf8cqDuVxam5Zx0s-0cGmY0MWaUhWdxgk5-Vz_CC7-31qylVmGRLx6TDesGUVbgksn4dKi3CcroI_v5fRHw";
+			String test = we.doStep2(JsapiTicket);
+			// request.getSession().setAttribute("demoTest", "{\"wxconfig\":"+test+",\"access_token\":\""+AccessToken+"\",\"jsapi_ticket\":\""+JsapiTicket+"\"}");
+			response.getWriter().print("{\"wxconfig\":"+test+",\"access_token\":\""+AccessToken+"\",\"jsapi_ticket\":\""+JsapiTicket+"\"}");
 	}
 
 	/**
@@ -75,9 +80,6 @@ public class ServletTest extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	}
-	public String JsapiTicket(String url, String param) {
-		return "";
 	}
 	public static String sendGet(String url, String param) {
         String result = "";

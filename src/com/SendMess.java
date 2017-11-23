@@ -124,12 +124,13 @@ public class SendMess {
 	        }
 	        return result;
 	    }    
-	
+	//da
 	    
 	    public static void pushNotify(String strMsg,int appid){
 	    	
 	    	
 			try {
+				//
 		//	SendMess.sendGet("http://api.biaoxintong.com:8080/landing-craft/recordController.do","dopush&content="+java.net.URLEncoder.encode(strMsg, "UTF-8"));
 			SendMess.sendGet("/recordController.do","doAdd&touser=@all&totag=&agentid="+appid+"&content="+java.net.URLEncoder.encode(strMsg, "UTF-8"));
 			SendMess.sendGet("/recordController.do","apppush&alert="+java.net.URLEncoder.encode(strMsg, "UTF-8"));

@@ -70,17 +70,19 @@ public class WeChatUtil {
             return new String("");
         }
 
-        public String doStep2()
-        {
-            nonceStr = getRandomString(15);
-            jsapi_ticket = "kgt8ON7yVITDhtdwci0qeZivwBqIbBwbdXwB4uJpwVGXGFAwK4yDhqlFtpb8nsqHKTf0C555UmCKF7j8TBnLUQ";//企业信息
-            appId = "ww58dfe8dfd432a0bf";   
-            long startTime = System.currentTimeMillis();//? bug?   
-            timestamp = startTime+"";
-            url = "h";
-            signature = getSha1("jsapi_ticket=" + jsapi_ticket + "&noncestr=" + nonceStr + "&timestamp=" + timestamp + "&url=" + url);
-            return signature;
+        public String doStep2(String jsapi_ticket) 
+        {            nonceStr = "qwertyuiop";
+            // jsapi_ticket = "kgt8ON7yVITDhtdwci0qeZivwBqIbBwbdXwB4uJpwVGXGFAwK4yDhqlFtpb8nsqHKTf0C555UmCKF7j8TBnLUQ";
+            long startTime = System.currentTimeMillis();   
+             timestamp = startTime+"";
+             String time_stamp = timestamp.substring(0,9);
+            //timestamp = "1511427653";
+            url = "http://qy2w94.natappfree.cc/wxconfig/index.html";
+   
+            signature = getSha1("jsapi_ticket=" + jsapi_ticket + "&noncestr=" + nonceStr + "&timestamp=" + time_stamp + "&url=" + url);
+            return "{\"timestamp\":\""+time_stamp+"\",\"nonceStr\":\""+nonceStr+"\",\"signature\":\""+signature+"\"}";
         }
+        //1511430561020
         public  String getRandomString(int length) { //length表示生成字符串的长度
             String base = "abcdefghijklmnopqrstuvwxyz0123456789";   
             Random random = new Random();   

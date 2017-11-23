@@ -8,11 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<button onClick="test()">提交</button>
+	<button onClick="test()">提交1</button>
 	<script>
 		function test(){
 			$.ajax(
-				{ url: "/WebContent/Demo1", 
+				{ url: "/WebContent/ServletTest", 
 				context: document.body, 
 				success: function(data){
 					console.log(data);
