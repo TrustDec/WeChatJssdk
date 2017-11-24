@@ -15,13 +15,10 @@ public class WeChatUtil {
         //步骤获取人物信息
 
        
-        //步骤一的
         //生成签名所需的jsapi_ticket，最长为512字节
         public String jsapi_ticket = "";
         //当前网页的URL，不包含#及其后面部分
         public String url = "";
-       //步骤二的
-        //企业微信的cropID
         public String appId = "ww58dfe8dfd432a0bf";
         //生成签名的时间戳
         public String timestamp = "";
@@ -70,20 +67,17 @@ public class WeChatUtil {
             return new String("");
         }
 
-        public String doStep2(String jsapi_ticket) 
-        {            nonceStr = "qwertyuiop";
-            // jsapi_ticket = "kgt8ON7yVITDhtdwci0qeZivwBqIbBwbdXwB4uJpwVGXGFAwK4yDhqlFtpb8nsqHKTf0C555UmCKF7j8TBnLUQ";
+        public String doStep2(String jsapi_ticket,String url) 
+        {            
+        	nonceStr = "qwertyuiop";
             long startTime = System.currentTimeMillis();   
              timestamp = startTime+"";
              String time_stamp = timestamp.substring(0,9);
-            //timestamp = "1511427653";
-            url = "http://qy2w94.natappfree.cc/wxconfig/index.html";
    
             signature = getSha1("jsapi_ticket=" + jsapi_ticket + "&noncestr=" + nonceStr + "&timestamp=" + time_stamp + "&url=" + url);
-            return "{\"timestamp\":\""+time_stamp+"\",\"nonceStr\":\""+nonceStr+"\",\"signature\":\""+signature+"\"}";
+            return "{\"timestamp\":\""+time_stamp+"\",\"nonceStr\":\""+nonceStr+"\",\"signature\":\""+signature+"\",\"corpid\":\""+appId+"\"}";
         }
-        //1511430561020
-        public  String getRandomString(int length) { //length表示生成字符串的长度
+        public  String getRandomString(int length) { 
             String base = "abcdefghijklmnopqrstuvwxyz0123456789";   
             Random random = new Random();   
             StringBuffer sb = new StringBuffer();   
