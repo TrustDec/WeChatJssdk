@@ -25,20 +25,7 @@ public class WeChatUtil {
         //生成签名的随机串
         public String nonceStr = "";
        public String signature = "";
-       
-
-
-
-        //自身服务的
-        public String realUrl= ReadXmlUtil.ReadXmlNode("realName");
     
-
-      //下面四个import放在类名前面 包名后面
-      //import java.io.UnsupportedEncodingException;
-      //import java.security.MessageDigest;
-      //import java.security.NoSuchAlgorithmException;
-      //import java.util.Arrays;
-       
         public  String getSha1(String str){
             if (null == str || 0 == str.length()){
                 return null;
